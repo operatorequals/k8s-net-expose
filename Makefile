@@ -5,4 +5,8 @@ REDIR=socat
 
 
 docker:
-	docker build . -t net-expose-$(CONN)-$(REDIR):$(VERSION) -f Dockerfile.$(CONN)-$(REDIR)
+	docker build . -t operatorequals/k8s-net-expose:$(CONN)-$(REDIR)-$(VERSION) -f Dockerfile.$(CONN)-$(REDIR)
+
+
+docker_push:
+	docker push operatorequals/k8s-net-expose:$(CONN)-$(REDIR)-$(VERSION)
