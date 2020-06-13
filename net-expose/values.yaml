@@ -1,0 +1,49 @@
+image:
+  repository: operatorequals/k8s-net-expose
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+ssh:
+  host: 
+  port: 22
+  user: root
+  # set SSH key using Helm --set-file
+  key: /path/to/id_rsa
+
+  # The remote port that will accept and tunnel connections to
+  # the exposed Kubernetes resource
+
+  # To attach to a <1024, SSH user must have root privileges
+remotePort: 8000
+
+  # By default net-expose tries to expose the K8s dashboard
+  # often deployed in Minikube builds.
+k8sExportService:
+  name: kubernetes-dashboard
+  port: 80
+
+  # Internal port used in the pod that listens and redirects traffic.
+  # Does not interfere with exported ports and service connection.
+podInternal:
+  port: 9999
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
