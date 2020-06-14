@@ -29,3 +29,10 @@ the `GatewayPorts` has to be set to `yes` in the `/etc/ssh/sshd_config` as below
 GatewayPorts yes
 [...]
 ```
+
+ To automate this process the `gatewayports_test.sh` can be used as below:
+```bash
+ ssh -i id_rsa REMOTE_HOST -l root ' sudo sh -s '  < gatewayports_test.sh
+ ```
+
+ To apply the change the SSH server needs a restart.
