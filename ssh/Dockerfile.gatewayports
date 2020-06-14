@@ -1,0 +1,25 @@
+FROM alpine:3.11
+RUN apk add --no-cache \
+  openssh-client \
+  ca-certificates 
+
+ENV SSH_HOST 127.0.0.1
+ENV SSH_PORT 22
+ENV SSH_USER root
+ENV SSH_KEY id_rsa
+
+ADD gatewayports_test.sh .
+
+
+# Test step
+# ADD id_rsa .
+# RUN chmod 600 id_rsa
+# RUN chown nobody:nobody id_rsa
+
+RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} ${SSH_HOST} -p ${SSH_PORT} -l ${SSH_USER} " sudo sh -s "  < gatewayports_test.sh' >> entrypoint.sh
+RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} ${SSH_HOST} -p ${SSH_PORT} -l ${SSH_USER} " sudo service sshd restart "' >> entrypoint.sh
+
+# Keep in mind - user nobody needs read access to 'id_rsa'
+USER nobody
+
+ENTRYPOINT ["sh", "entrypoint.sh"]
