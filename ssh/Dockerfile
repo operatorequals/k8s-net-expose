@@ -1,8 +1,7 @@
 FROM alpine:3.11
 RUN apk add --no-cache \
   openssh-client \
-  ca-certificates \
-  socat
+  ca-certificates
 
 ENV SSH_HOST 127.0.0.1
 ENV SSH_PORT 22
@@ -14,11 +13,8 @@ ENV REMOTE_PORT 8000
 ENV K8S_RSC_DNS kubernetes-dashboard
 ENV K8S_RSC_PORT 80
 
-ENV POD_INT_PORT 9999
 
-
-RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} -l ${SSH_USER} ${SSH_HOST} -p ${SSH_PORT} -R *:${REMOTE_PORT}:localhost:${POD_INT_PORT} -N &' >> entrypoint.sh
-RUN echo 'socat TCP-LISTEN:${POD_INT_PORT},fork TCP:${K8S_RSC_DNS}:${K8S_RSC_PORT}' >> entrypoint.sh
+RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} -l ${SSH_USER} ${SSH_HOST} -p ${SSH_PORT} -R *:${REMOTE_PORT}:${K8S_RSC_DNS}:${K8S_RSC_PORT} -N &' >> entrypoint.sh
 
 # Test step
 # ADD id_rsa .
