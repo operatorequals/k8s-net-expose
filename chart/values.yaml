@@ -1,5 +1,6 @@
 image:
   repository: operatorequals/k8s-net-expose
+  tag: ssh-0.1.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -24,11 +25,6 @@ remotePort: 8000
 k8sExportService:
   name: kubernetes-dashboard
   port: 80
-
-  # Internal port used in the pod that listens and redirects traffic.
-  # Does not interfere with exported ports and service connection.
-podInternal:
-  port: 9999
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
