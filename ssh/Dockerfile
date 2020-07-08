@@ -13,8 +13,8 @@ ENV REMOTE_PORT 8000
 ENV K8S_RSC_DNS kubernetes-dashboard
 ENV K8S_RSC_PORT 80
 
-
-RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} -l ${SSH_USER} ${SSH_HOST} -p ${SSH_PORT} -R *:${REMOTE_PORT}:${K8S_RSC_DNS}:${K8S_RSC_PORT} -N &' >> entrypoint.sh
+# RUN echo 'env' >> entrypoint.sh
+RUN echo 'ssh -o "StrictHostKeyChecking no" -i ${SSH_KEY} -l ${SSH_USER} ${SSH_HOST} -p ${SSH_PORT} -R *:${REMOTE_PORT}:${K8S_RSC_DNS}:${K8S_RSC_PORT} -N' >> entrypoint.sh
 
 # Test step
 # ADD id_rsa .
