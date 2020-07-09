@@ -5,6 +5,22 @@ You have created a Kubernetes cluster at home with [k3sup](https://github.com/al
 
 Exposing your deployment to the Internet is not so trivial though!
 
+## How to install
+To install `net-expose` through Helm you need to add this git repository as a helm repo:
+```bash
+helm repo add net-expose https://raw.githubusercontent.com/operatorequals/k8s-net-expose/master/charts/stable
+helm repo update
+
+helm install nginx-ingress net-expose/net-expose \
+	--set ssh.host=ssh-connect.example.com \
+	--set ssh.user=admin \
+	--set-file ssh.key=~/.ssh/id_rsa \
+	--set remotePort=8080 \
+	--set k8sExportService.name=nginx-ingress-controller \
+	--set k8sExportService.port=80
+```
+
+
 ## What it does
 Exposes internal Kubernetes resources (anything with an IP and port) to public VPS hosts.
 You only need a working SSH key for the VPS. The rest is on `net-expose`.
