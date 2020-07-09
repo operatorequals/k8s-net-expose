@@ -12,7 +12,7 @@ spec:
   {{ if .Values.gatewayports.enable }}
   initContainers:
     - name: gatewayports-enable
-      image: {{ Values.gatewayports.image }}
+      image: {{ .Values.gatewayports.image }}
       env:
       - name: SSH_HOST
         value: "{{ .Values.ssh.host }}"
