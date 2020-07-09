@@ -1,3 +1,14 @@
 apiVersion: v1
-entries: {}
-generated: "2020-07-09T09:32:19.824165+03:00"
+entries:
+  net-expose:
+  - apiVersion: v2
+    appVersion: ssh-0.1.0
+    created: "2020-07-09T09:58:53.344305+03:00"
+    description: Expose your Kubernetes resources to the world!
+    digest: b369f1b2a4708b5af87b735c202915e5eba965948abe497df411658253389297
+    name: net-expose
+    type: application
+    urls:
+    - net-expose-0.2.0.tgz
+    version: 0.2.0
+generated: "2020-07-09T09:58:53.34083+03:00"
