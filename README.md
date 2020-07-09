@@ -52,3 +52,15 @@ GatewayPorts yes
  ```
 
  To apply the change the SSH server needs a restart.
+
+#### The `gatewayports` `initContainer`
+
+A K8s `initContainer` can be created from the Helm release to automatically run the `gatewayports_test.sh` towards the remote
+host and restart the SSH server before creating the connection tunnel.
+To enable this feature the `gatewayports.enable` needs to be set to `true` in the Helm `values.yaml` as below:
+
+```bash
+helm install nginx-ingress net-expose/net-expose \
+[...]
+	--set gatewayports.enable=true
+```
