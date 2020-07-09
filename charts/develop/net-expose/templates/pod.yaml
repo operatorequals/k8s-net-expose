@@ -9,6 +9,24 @@ metadata:
 
     app: {{ include "net-expose.fullname" . }}
 spec:
+  {{ if .Values.gatewayports.enable }}
+  initContainers:
+    - name: gatewayports-enable
+      image: {{ Values.gatewayports.image }}
+      env:
+      - name: SSH_HOST
+        value: "{{ .Values.ssh.host }}"
+      - name: SSH_PORT
+        value: "{{ .Values.ssh.port }}"
+      - name: SSH_USER
+        value: "{{ .Values.ssh.user }}"
+      - name: SSH_KEY
+        value: /.ssh/id_ssh
+      volumeMounts:
+      - name: ssh-key
+        mountPath: "/.ssh"
+        readOnly: true        
+  {{ end }}
   containers:
     - name: pod
       image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
