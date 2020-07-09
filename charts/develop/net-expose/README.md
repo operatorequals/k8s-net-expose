@@ -48,7 +48,7 @@ Parameter | Description | Default
 `remotePort` | The port that listens for connections on the remote host. To bind ports `<1024` the `ssh.user` needs to have `root` privileges in the remote host | `8000`
 `k8sExportService.name` | The Kubernetes `Service` or `Pod` hostname or DNS | `kubernetes-dashboard`
 `k8sExportService.port` | The Kubernetes `Service` or `Pod` port that needs to be exposed | `80`
-`podInternal.port` | The `net-expose` Pod port that redirects traffic. | `9999`
+`gatewayports.enabled` | Uses an `initContainer` to automatically set `GatewayPorts` OpenSSH server config to `yes`  | `false`
 
 
 These parameters can be passed via Helm's `--set` option
@@ -59,7 +59,8 @@ $ helm install --replace ec2-instance1 net-expose \
 	--set-file ssh.key=.ssh/id_rsa \
 	--set k8sExportService.name=nginx-ingress-controller \
 	--set k8sExportService.port=443 \
-	--set remotePort=443
+	--set remotePort=443 \
+	--set gatewayports.enabled=true
 
 ```
 
