@@ -30,8 +30,8 @@ You only need a working SSH key for the VPS. The rest is on `net-expose`.
 ## How it works
 
 The `net-expose` deployment consists of a Kubernetes `Pod` with just enough privileges to remotely SSH to a VPS and establish a 
-reverse SSH proxy, redirecting VPS port traffic inside the `Pod`. A redirector (`socat`) in the `Pod` addresses the TCP connections to the 
-internal Kubernetes resource (`Pod` or `Service`) to be exposed, making it accessible through the initial VPS port.
+reverse SSH proxy, redirecting VPS port traffic to the internal Kubernetes resource (`Pod` or `Service`) to be exposed,
+making it accessible through the initial VPS port.
 
 ![generic-schematic-deep](https://github.com/operatorequals/k8s-net-expose/raw/documentation/assets/net-expose-schematic-deep.png)
 
