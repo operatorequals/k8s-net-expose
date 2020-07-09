@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name:  {{ include "net-expose.fullname" . }}-ssh-{{ randAlphaNum 4 | lower }}
+  labels:
+    {{- include "net-expose.labels" . | nindent 4 }}
+    net-expose/remoteHost: "{{ .Values.ssh.host }}-{{ .Values.ssh.port }}"
+    net-expose/exposedService: "{{ .Values.remotePort }}-{{ .Values.k8sExportService.name }}-{{ .Values.k8sExportService.port }}"
+
+    app: {{ include "net-expose.fullname" . }}
+spec:
+  containers:
+    - name: pod
+      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      volumeMounts:
+      - name: ssh-key
+        mountPath: "/.ssh"
+        readOnly: true
+      env:
+      - name: SSH_HOST
+        value: "{{ .Values.ssh.host }}"
+
+      - name: SSH_PORT
+        value: "{{ .Values.ssh.port }}"
+
+      - name: SSH_USER
+        value: "{{ .Values.ssh.user }}"
+
+      - name: SSH_KEY
+        value: /.ssh/id_ssh
+
+      - name: REMOTE_PORT
+        value: "{{ .Values.remotePort }}"
+
+      - name: K8S_RSC_DNS
+        value: "{{ .Values.k8sExportService.name }}"
+
+      - name: K8S_RSC_PORT
+        value: "{{ .Values.k8sExportService.port }}"
+
+  volumes:
+  - name: ssh-key
+    projected:
+      sources:
+      - secret:
+          name: "{{ include "net-expose.fullname" . }}-ssh-key"
+          items: 
+            - key: id-ssh
+              path: id_ssh
+              mode: 0400
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    fsGroup: 2000
