@@ -3,7 +3,7 @@ entries:
   net-expose:
   - apiVersion: v2
     appVersion: ssh-0.1.0
-    created: "2020-07-09T10:58:16.379676+03:00"
+    created: "2020-07-09T11:42:55.191555+03:00"
     description: Expose your Kubernetes resources to the world!
     digest: 57bc88f2e9937187f8e51be11a321b759ce53cd0f0d568dd67e9a1705c53ec84
     name: net-expose
@@ -13,7 +13,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: ssh-0.1.0
-    created: "2020-07-09T10:58:16.3786+03:00"
+    created: "2020-07-09T11:42:55.191164+03:00"
     description: Expose your Kubernetes resources to the world!
     digest: 167bb9aa563c24841a95ba63b3f2e3907c332a5415328160bf9ba27203e56d3f
     name: net-expose
@@ -21,4 +21,4 @@ entries:
     urls:
     - net-expose-0.2.0.tgz
     version: 0.2.0
-generated: "2020-07-09T10:58:16.376788+03:00"
+generated: "2020-07-09T11:42:55.176331+03:00"
