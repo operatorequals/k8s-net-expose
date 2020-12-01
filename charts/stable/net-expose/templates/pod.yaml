@@ -4,8 +4,10 @@ metadata:
   name:  {{ include "net-expose.fullname" . }}-ssh-{{ randAlphaNum 4 | lower }}
   labels:
     {{- include "net-expose.labels" . | nindent 4 }}
-    net-expose/remoteHost: "{{ .Values.ssh.host }}-{{ .Values.ssh.port }}"
-    net-expose/exposedService: "{{ .Values.remotePort }}-{{ .Values.k8sExportService.name }}-{{ .Values.k8sExportService.port }}"
+    net-expose/remote.host: "{{ .Values.ssh.host }}"
+    net-expose/remote.port: "{{ .Values.remotePort }}"
+    net-expose/exposedService.host: "{{ .Values.k8sExportService.name }}"
+    net-expose/exposedService.host: "{{ .Values.k8sExportService.port }}"
 
     app: {{ include "net-expose.fullname" . }}
 spec:
