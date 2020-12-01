@@ -57,6 +57,11 @@ spec:
 
       - name: K8S_RSC_PORT
         value: "{{ .Values.k8sExportService.port }}"
+      livenessProbe:
+        tcpSocket:
+          host: {{ .Values.ssh.host }}
+          port: {{ .Values.remotePort }}
+        initialDelaySeconds: 10
 
   volumes:
   - name: ssh-key
